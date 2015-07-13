@@ -1,7 +1,7 @@
 # version 1 - IBM Installation Manager(I.M) silent install on a docker centos6 linux image. You might do this using an official supported Red Hat or Suze
 # See the complete list of supported O.S looking at the official IBM documentation.
 # IBM Installation Manager 1.8 Documentation - http://www-01.ibm.com/support/knowledgecenter/SSDV2W_1.8.0/com.ibm.cic.agent.ui.doc/helpindex_imic.html?cp=SSDV2W_1.8.0%2F0
-# by mmaia - mpais@br.ibm.com, maia.marcos@gmail.com
+# by mmaia - mpais@br.ibm.com, maia.marcos@gmail.com (original author)
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 # IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 # FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -18,7 +18,10 @@
 # +------------------------------------------------------------------------+
 
 FROM centos:centos6
-MAINTAINER Marcos Maia "mpais@br.ibm.com / maia.marcos@gmail.com"
+MAINTAINER John Jacobson "jjacobso@us.ibm.com/jjacobso@gmail.com"
+
+# add yum proxy
+RUN sed -i -e '/^\[main\]/aproxy=http://192.168.1.50:8888' /etc/yum.conf
 
 # make sure centos is up to date and install unzip support to decompress I.M file later
 RUN yum update -y && yum install -y unzip
